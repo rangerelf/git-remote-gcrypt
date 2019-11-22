@@ -11,6 +11,9 @@ install_v()
 	# Install $1 into $2/ with mode $3
 	verbose install -d "$2" &&
 	verbose install -m "$3" "$1" "$2"
+  if [ -n "$TERMUX_PREFIX" ]; then
+    sed -i~ "s|^#!/bin/sh$|#!$2|g" "$2/$1"
+  fi
 }
 
 install_v git-remote-gcrypt "$TERMUX_PREFIX$DESTDIR$prefix/bin" 755
