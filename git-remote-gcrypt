@@ -35,7 +35,6 @@ Hex40="[a-f0-9]"
 Hex40=$Hex40$Hex40$Hex40$Hex40$Hex40$Hex40$Hex40$Hex40
 Hex40=$Hex40$Hex40$Hex40$Hex40$Hex40 # Match SHA-1 hexdigest
 GPG="$(git config --get "gpg.program" '.+' || echo gpg)"
-#GPG_TTY=$(tty)
 
 Did_find_repo=  # yes for connected, no for no repo
 Localdir="${GIT_DIR:=.git}/remote-gcrypt"

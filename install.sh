@@ -19,7 +19,6 @@ install_v()
 	if [ -n "$TERMUX" ]; then
 		# If running under termux, enable gpg_tty assignment.
 		sed -i -e "s|^#!/bin/sh$|#!$2/sh|g" \
-			-e "s|^#GPG_TTY=|GPG_TTY=|g" \
 			"$2/$1"
 	fi
 }
@@ -41,4 +40,11 @@ then
 	install_v git-remote-gcrypt.1.gz "$TERMUX$DESTDIR$prefix/share/man/man1" 644
 else
 	echo "'rst2man' not found, man page not installed" >&2
+fi
+
+if [ -n "$TERMUX" ] ; then
+	if ! grep -q "^export GPG_TTY" ~/.bashrc ; then
+		echo "Setting export for GPG_TTY in ~/.bashrc" >&2
+		echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
+	fi
 fi
