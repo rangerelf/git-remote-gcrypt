@@ -43,7 +43,9 @@ else
 fi
 
 if [ -n "$TERMUX" ] ; then
-	if ! grep -q "^export GPG_TTY" ~/.bashrc ; then
+	if grep -q "^export GPG_TTY" ~/.bashrc ; then
+		echo "GPG_TTY assignment already in ~/.bashrc" >&2
+	else
 		echo "Setting export for GPG_TTY in ~/.bashrc" >&2
 		echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
 	fi
